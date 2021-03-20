@@ -2,6 +2,8 @@
 #include "catch.hpp"
 #include "vars.h"
 #include "input.h"
+#include "numbers.h"
+#include "auto.h"
 #include<string>
 
 TEST_CASE("Verify Test Configuration", "verification") {
@@ -19,12 +21,20 @@ TEST_CASE("Verify get total function", "should return the products of params")
   REQUIRE(get_total(5,10) == 50);
 }
 /*test case add_to_double_1 with 0 as parameter*/
+TEST_CASE("Verify add to double 1 function", "verify decimal comparison inconsistencies")
+{
+  //REQUIRE(add_to_double_1(0) == .9);
+	REQUIRE(add_to_double_1(1) == 1.9);
+}
 
 /*test case add_to_double_1 with 1 as parameter*/
 
 /*test case add_to_double_2 with 0 as parameter*/
 
 /*test case add_to_double_2 with 1 as parameter*/
+TEST_CASE("Verify auto int function", "should return 10") {
+	REQUIRE(auto_int() == 10);
+}
 
 /*test case char test ASCII values */
 
