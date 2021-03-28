@@ -1,2 +1,2 @@
 10language = "cpp"
-run="export CC=clang; export CXX=clang++; mkdir -p ../build; cd ../build; cmake ../acc-cosc-1337-spring-2021-Hannah-Kim-acc/; make; cd test/homework_test/01_variables_test; ./hw_01_tests -s" 
+run="export CC=clang; export CXX=clang++; mkdir -p ../build; cd ../build; cmake ../acc-cosc-1337-spring-2021-Hannah-Kim-acc/; make; cd src/homework/04_iteration; ./hw_04_exe -s" 
