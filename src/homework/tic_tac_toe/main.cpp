@@ -1,5 +1,4 @@
-#include "tic_tac_toe.h"
-
+#include "tic_tac_toe_manager.h"
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -7,31 +6,39 @@ using std::cin;
 int main()
 {
   TicTacToe tictactoe;
-  string first_player;
-  int position = 1;
-  string user_opts="y";
+  TicTacToeManager manager;
 
-  while(user_opts=="y")
+  string player;
+  string user_opts;
+
+  do
   {
-    while(first_player!="X"&&first_player!="O")
+    do
     {
       cout<<"Enter X or O: ";
-      cin>>first_player;
-    }
-    tictactoe.start_game(first_player);
+      cin>>player;
+    }while(player!="X"&&player!="O");
 
-    while(tictactoe.game_over()==false)
+    tictactoe.start_game(player);
+
+    do
     {
-      cout<<"Enter position from 1 to 9: ";
-      cin>>position;
-      if(position<10&&position>0)
-      {
-        tictactoe.mark_board(position);
-        tictactoe.display_board();
-      }
-    }
-    cout<<"Game overplay again? y ";
+      cin>>tictactoe;
+      cout<<tictactoe;
+
+    }while(tictactoe.game_over()==false);
+    cout<<tictactoe;
+    cout<<"\nGame over \n\n";
+    manager.save_game(tictactoe);
+
+    int o,x,t;
+    manager.get_winner_total(x,o,t);
+    cout<<"X wins: "<<x<<"\nO wins: "<<o<<"\nTies: "<<t<<"\n\n";
+
+    cout<<"Play again? Y or y ";
     cin>>user_opts;
-  }
+
+  }while(user_opts=="y"||user_opts == "Y");
+  cout<<manager;
 	return 0;
 }

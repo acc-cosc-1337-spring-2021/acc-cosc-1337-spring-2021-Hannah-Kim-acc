@@ -1,7 +1,32 @@
 //cpp
 #include "tic_tac_toe.h"
+
 #include <iostream>
-using std::cout;
+
+
+std::istream& operator>>(std::istream &is, TicTacToe &game)
+{
+  int position = 1;
+
+  std::cout<<"Enter position from 1 to 9: ";
+  is>>position;
+  if(position>0 && position<10)
+  {
+    game.mark_board(position);
+  }
+
+  return is;
+}
+
+std::ostream& operator<<(std::ostream &out, const TicTacToe &game)
+{
+  for(int i=0 ;i<9;i+=3)
+  {
+    out<<game.pegs[i]<<"|"<<game.pegs[i+1]<<"|"<<game.pegs[i+2]<<"\n";
+  }
+
+  return out;
+}
 
 
 void TicTacToe::clear_board()
@@ -75,8 +100,8 @@ bool TicTacToe::check_diagonal_win()
 void TicTacToe::set_winner()
 {
   if(player=="X")
-  {winner = "O";}
-  else {winner="X";}
+  {winner = "X";}
+  else {winner="O";}
 }
 
 
@@ -105,6 +130,7 @@ void TicTacToe::start_game(string first_player)
   clear_board();
 }
 
+
 void TicTacToe::mark_board(int position)
 {
   if (player == "X")
@@ -115,17 +141,20 @@ void TicTacToe::mark_board(int position)
   {
     pegs[position-1]="O";
   }
-  if(game_over()== true)
+  /*if(game_over()== true)
   {
-    display_board();
+    //display_board();
     cout<<"Game Over"<<"\n";
   }
   else
   {
     set_next_player();
-  }
+  }*/
+  set_next_player();
 }
 
+
+/*
 void TicTacToe::display_board()const
 {
   for(int i=0;i<9;i+=3)
@@ -133,3 +162,4 @@ void TicTacToe::display_board()const
     cout<<pegs[i]<<"|"<<pegs[i+1]<<"|"<<pegs[i+2]<<"\n";
   }
 }
+*/

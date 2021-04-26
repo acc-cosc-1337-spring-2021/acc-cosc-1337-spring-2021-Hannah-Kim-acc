@@ -8,6 +8,7 @@ using std::cout;
 
 int main()
 {
+
   BankAccount account = get_account(100);
   ATM atm(account);
 

@@ -30,6 +30,7 @@ void friend_display_balance(const BankAccount& account)
   cout<<"Friend Display balance: " << account.balance<<"\n";
 }
 
+
 //free function not part of bank account class!
 
 void display_balance(const BankAccount& account)
