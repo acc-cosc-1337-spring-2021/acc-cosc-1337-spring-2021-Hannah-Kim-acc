@@ -2,36 +2,42 @@
 #include "tic_tac_toe.h"
 
 #include <iostream>
-
+#include <math.h>
 
 std::istream& operator>>(std::istream &is, TicTacToe &game)
 {
-  int position = 1;
+  int position = 0;
+  int board_size = game.pegs.size();
+  do {
+    std::cout<<"Enter position from 1 to " << board_size << ": ";
+    is >> position;
+  } while ((position < 1 || position > board_size) && game.is_position_empty(position));
 
-  std::cout<<"Enter position from 1 to 9: ";
-  is>>position;
-  if(position>0 && position<10)
-  {
-    game.mark_board(position);
-  }
-
+  game.mark_board(position);
   return is;
 }
 
 std::ostream& operator<<(std::ostream &out, const TicTacToe &game)
 {
-  for(int i=0 ;i<9;i+=3)
-  {
-    out<<game.pegs[i]<<"|"<<game.pegs[i+1]<<"|"<<game.pegs[i+2]<<"\n";
+  int size = sqrt(game.pegs.size());
+  for (int i = 0; i < size * size; i+= size) {
+    for (int j = 0; j < size; j++) {
+      out << game.pegs[i + j];
+      if (j < size - 1) {
+        out << "|";
+      }
+    }
+    out << "\n";
   }
 
   return out;
 }
 
+TicTacToe::TicTacToe(int size): pegs(size * size, " ") {}
 
 void TicTacToe::clear_board()
 {
-  for(int i=0;i<9;i++)
+  for(int i=0;i<pegs.size();i++)
   {
     pegs[i] = " ";
   }
@@ -39,12 +45,11 @@ void TicTacToe::clear_board()
 
 bool TicTacToe::check_board_full()const
 {
-  for(int i=0;i<9;i++)
+  for(int i=0;i<pegs.size();i++)
   {
     if (pegs[i] == " ")
     {
       return false;
-      break;
     }
   }
   return true;
@@ -52,6 +57,10 @@ bool TicTacToe::check_board_full()const
 
 bool TicTacToe::check_column_win()
 {
+  int size = sqrt(pegs.size());
+  for (int i = 0; i < size; i++) {
+    string peg = pegs[i];
+  }
   if(pegs[0]=="X"&&pegs[3]=="X"&&pegs[6]=="X")
   {return true;}
   else if(pegs[0]=="O"&&pegs[3]=="O"&&pegs[6]=="O")
@@ -107,12 +116,14 @@ void TicTacToe::set_winner()
 
 bool TicTacToe::game_over()
 {
-  if(check_row_win()==true||check_column_win()==true||check_diagonal_win()==true)
+  if(check_row_win()||check_column_win()||check_diagonal_win())
   {
     set_winner();
     return true;
   }
-  else if(check_board_full()==true){winner="C";return true;}
+  else if(check_board_full()) {
+    winner="C"; return true;
+  }
   else{return false;}
 }
 
@@ -151,6 +162,10 @@ void TicTacToe::mark_board(int position)
     set_next_player();
   }*/
   set_next_player();
+}
+
+bool TicTacToe::is_position_empty(int position) {
+  return pegs[position - 1] == " ";
 }
 
 

@@ -3,9 +3,11 @@
 
 class TicTacToeManager
 {
+
   friend std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager);
   
   private:
+
   vector<TicTacToe> games;
   int x_win = {0};
   int o_win = {0};
@@ -17,4 +19,5 @@ class TicTacToeManager
   
   void save_game(TicTacToe b);
   void get_winner_total(int& o, int& x, int& t);
+
 };

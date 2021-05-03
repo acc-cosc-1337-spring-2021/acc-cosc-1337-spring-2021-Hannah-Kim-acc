@@ -5,7 +5,7 @@ using std::cin;
 
 int main()
 {
-  TicTacToe tictactoe;
+  TicTacToe tictactoe(4);
   TicTacToeManager manager;
 
   string player;
@@ -32,7 +32,7 @@ int main()
     manager.save_game(tictactoe);
 
     int o,x,t;
-    manager.get_winner_total(x,o,t);
+    manager.get_winner_total(o,x,t);
     cout<<"X wins: "<<x<<"\nO wins: "<<o<<"\nTies: "<<t<<"\n\n";
 
     cout<<"Play again? Y or y ";
