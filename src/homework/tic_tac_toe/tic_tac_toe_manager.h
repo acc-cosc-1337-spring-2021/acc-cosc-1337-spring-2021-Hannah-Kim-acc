@@ -1,5 +1,11 @@
 //h
-#include "tic_tac_toe.h"
+#ifndef TICTACTOE_MANAGER_H
+#define TICTACTOE_MANAGER_H
+
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
+#include <memory>
+using std::unique_ptr; using std::make_unique;
 
 class TicTacToeManager
 {
@@ -8,7 +14,7 @@ class TicTacToeManager
   
   private:
 
-  vector<TicTacToe> games;
+  vector<unique_ptr<TicTacToe>> games;
   int x_win = {0};
   int o_win = {0};
   int ties = {0};
@@ -17,7 +23,9 @@ class TicTacToeManager
 
   public:
   
-  void save_game(TicTacToe b);
+  void save_game(unique_ptr<TicTacToe> &b);
   void get_winner_total(int& o, int& x, int& t);
 
 };
+
+#endif

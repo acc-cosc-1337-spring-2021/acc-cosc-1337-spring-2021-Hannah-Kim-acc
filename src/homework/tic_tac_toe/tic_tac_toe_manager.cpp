@@ -1,11 +1,11 @@
 //cpp
 #include "tic_tac_toe_manager.h"
-#include <vector>
-using std::vector;
 
+#include <utility>
+using std::move;
 
 #include<ostream>
-
+ 
 void TicTacToeManager::update_winner_count(string winner)
 {
   if (winner =="X"){x_win ++;}
@@ -13,10 +13,10 @@ void TicTacToeManager::update_winner_count(string winner)
   else{ties ++;}
 }
 
-void TicTacToeManager::save_game(TicTacToe b)
+void TicTacToeManager::save_game(unique_ptr<TicTacToe> &b)
 {
-  games.push_back(b);
-  update_winner_count(b.get_winner());
+  update_winner_count(b->get_winner());
+  games.push_back(move(b)); 
 }
 
 
@@ -29,15 +29,14 @@ void TicTacToeManager::get_winner_total(int& o, int& x, int& t)
 
 std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager)
 {
-  for(auto game: manager.games)
+  for(auto const& game: manager.games)
   {
-    out<<"\n"<<game<<"\n";
+    out<<*game<<"\n";
   }
 
-  out<<"O wins: "<<manager.o_win<<"\n";
   out<<"X wins: "<<manager.x_win<<"\n";
-  out<<"TIES: "<<manager.ties<<"\n";
+  out<<"O wins: "<<manager.o_win<<"\n";
+  out<<"TIES  : "<<manager.ties<<"\n";
 
   return out;
 }
-
