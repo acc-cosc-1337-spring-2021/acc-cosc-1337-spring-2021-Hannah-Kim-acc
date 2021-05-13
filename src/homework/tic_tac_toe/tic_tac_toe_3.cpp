@@ -2,7 +2,8 @@
 
 bool TicTacToe3::check_column_win()
 {
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 3; i++) 
+  {
     if (pegs[i] != " " && pegs[i] == pegs[i + 3] && pegs[i] == pegs[i + 6]) {
       return true;
     }
